@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eutecnet — Soluciones para Laboratorios Farmacéuticos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2db34a;
+    --green-dark: #1e8c38;
+    --green-light: #e8f7eb;
+    --black: #0d0d0d;
+    --white: #ffffff;
+    --gray: #f4f4f2;
+    --text-muted: #6b7280;
+    --border: #e2e8e0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ─── TOPBAR ─── */
+  .topbar {
+    background: var(--black);
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #a3e6b0;
+    letter-spacing: 0.04em;
+  }
+
+  .topbar span { color: var(--green); font-weight: 600; }
+
+  /* ─── NAV ─── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 48px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--green);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 18px; font-weight: 800;
+  }
+
+  .nav-badge {
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid #b6e5c0;
+  }
+
+  /* ─── SECTION 1: HERO + VSL ─── */
+  .hero {
+    padding: 72px 48px 56px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pill {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    border: 1px solid #b6e5c0;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.12;
+    color: var(--black);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  h1 .accent { color: var(--green); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* VSL Container */
+  .vsl-wrapper {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.18);
+    border: 3px solid var(--green);
+  }
+
+  .vsl-inner {
+    position: relative;
+    background: #000;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .vsl-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0d2b15 0%, #1a4d28 50%, #0d2b15 100%);
+  }
+
+  .vsl-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(45,179,74,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45,179,74,0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .vsl-center {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+  }
+
+  .play-btn {
+    width: 80px; height: 80px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 40px rgba(45,179,74,0.5);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(45,179,74,0.4); }
+    50% { box-shadow: 0 0 60px rgba(45,179,74,0.7); }
+  }
+
+  .play-btn:hover { transform: scale(1.08); }
+
+  .play-btn svg { margin-left: 5px; }
+
+  .vsl-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .vsl-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* Timer overlay */
+  .vsl-playing { display: none; }
+  .vsl-playing.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    position: absolute;
+    z-index: 10;
+    background: #000;
+    color: white;
+  }
+
+  .video-embed {
+    width: 100%; height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  .timer-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    z-index: 20;
+  }
+
+  .timer-fill {
+    height: 100%;
+    background: var(--green);
+    width: 0%;
+    transition: width 1s linear;
+  }
+
+  .timer-label {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 20;
+    font-weight: 600;
+  }
+
+  .vsl-cta-bar {
+    display: none;
+    background: var(--green);
+    padding: 14px 24px;
+    text-align: center;
+    animation: slideUp 0.5s ease;
+  }
+
+  .vsl-cta-bar.visible { display: block; }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .vsl-cta-bar p {
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--green-dark);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: var(--black);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .btn-green {
+    background: var(--green);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-green:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+  .vsl-disclaimer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+
+  /* ─── SECTION 2: BENEFICIOS ─── */
+  .section-benefits {
+    padding: 80px 48px;
+    background: var(--black);
+    color: white;
+  }
+
+  .section-benefits .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.18;
+    margin-bottom: 56px;
+    letter-spacing: -0.02em;
+  }
+
+  .section-title .dim { opacity: 0.4; }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+  }
+
+  .benefit-card {
+    background: #141414;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .benefit-card:hover { background: #1a1a1a; }
+
+  .benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--green);
+    transition: height 0.3s ease;
+  }
+
+  .benefit-card:hover::before { height: 100%; }
+
+  .benefit-icon {
+    width: 48px; height: 48px;
+    background: rgba(45,179,74,0.12);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .benefit-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .benefit-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 2px;
+  }
+
+  .stat-item {
+    background: var(--green);
+    padding: 28px 32px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: white;
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ─── SECTION 3: FORMULARIO ─── */
+  .section-form {
+    padding: 80px 48px;
+    background: var(--gray);
+  }
+
+  .form-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .form-header { text-align: center; margin-bottom: 48px; }
+
+  .form-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .form-header p {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .form-card {
+    background: white;
+    border-radius: 16px;
+    padding: 48px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+    border: 1px solid var(--border);
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .step-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  .step-dot.active { background: var(--green); color: white; }
+  .step-dot.done { background: var(--green-dark); color: white; }
+
+  .step-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+
+  .step-line.done { background: var(--green); }
+
+  /* Form steps */
+  .form-step { display: none; }
+  .form-step.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .form-question {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+
+  .form-hint {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .option-btn {
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .option-btn:hover, .option-btn.selected {
+    border-color: var(--green);
+    background: var(--green-light);
+    color: var(--green-dark);
+  }
+
+  .option-btn .opt-icon { font-size: 20px; display: block; margin-bottom: 6px; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  input[type=text], input[type=email], input[type=tel], select, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--black);
+    background: white;
+    outline: none;
+    transition: border-color 0.15s;
+    margin-bottom: 18px;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus { border-color: var(--green); }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .nav-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .btn-back {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 0;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .btn-back:hover { color: var(--black); }
+
+  .btn-next {
+    background: var(--green);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 28px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .btn-next:hover { background: var(--green-dark); }
+
+  .trust-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .trust-item { display: flex; align-items: center; gap: 5px; }
+
+  /* Success state */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .form-success.active { display: block; animation: fadeIn 0.5s ease; }
+
+  .success-icon {
+    width: 72px; height: 72px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 32px;
+  }
+
+  /* ─── MODAL (Formulario tras el video) ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: white;
+    border-radius: 20px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes modalIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: none; border: none;
+    font-size: 22px; cursor: pointer;
+    color: var(--text-muted);
+  }
+
+  .modal-box .pill { margin-bottom: 12px; }
+
+  .modal-box h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .modal-box .sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    padding: 32px 48px;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+    border-top: 1px solid #1f1f1f;
+  }
+
+  footer a { color: var(--green); text-decoration: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .hero { padding: 48px 20px 40px; }
+    .section-benefits, .section-form { padding: 60px 20px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+    .form-card { padding: 28px 20px; }
+    .modal-box { padding: 32px 20px; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  Más de <span>20 años</span> de experiencia en ingeniería industrial · Especialistas en sistemas para laboratorios farmacéuticos
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">E</div>
+    Eutecnet
+  </a>
+  <span class="nav-badge">✓ Empresa certificada OCA</span>
+</nav>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 1 — HEADLINE + VSL
+════════════════════════════════════════ -->
+<section class="hero">
+  <div class="pill">Solo para laboratorios farmacéuticos</div>
+  <h1>
+    Tu planta pierde dinero<br>
+    cada vez que tu maquinaria<br>
+    <span class="accent">no está optimizada.</span>
+  </h1>
+  <p class="hero-sub">
+    Descubre cómo los laboratorios farmacéuticos más exigentes garantizan cero paradas, total trazabilidad y cumplimiento normativo sin depender de múltiples proveedores.
+  </p>
+
+  <!-- VSL -->
+  <div class="vsl-wrapper" id="vslWrapper">
+
+    <!-- Pantalla inicial (thumbnail) -->
+    <div class="vsl-inner" id="vslThumbnail" onclick="startVideo()">
+      <div class="vsl-bg"></div>
+      <div class="vsl-grid"></div>
+      <div class="vsl-center">
+        <div class="play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="vsl-title">Ver cómo resolvemos el problema<br>de raíz — 6 minutos</div>
+        <div class="vsl-subtitle">Vídeo exclusivo para responsables de planta y compras</div>
+      </div>
+    </div>
+
+    <!-- Video + timer -->
+    <div id="vslPlaying" style="display:none; position:relative; aspect-ratio:16/9; background:#000;">
+      <iframe
+        id="ytPlayer"
+        class="video-embed"
+        src=""
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      ></iframe>
+      <div class="timer-bar">
+        <div class="timer-fill" id="timerFill"></div>
+      </div>
+      <div class="timer-label" id="timerLabel">Cargando...</div>
+    </div>
+
+    <!-- CTA que aparece tras 3 min -->
+    <div class="vsl-cta-bar" id="vslCta">
+      <p>🎯 ¿Reconoces alguno de estos problemas en tu laboratorio?</p>
+      <button class="btn-primary" onclick="openModal()">
+        Quiero que me llame un especialista — Es gratis
+      </button>
+    </div>
+  </div>
+
+  <p class="vsl-disclaimer">Sin compromiso. Solo para laboratorios del sector farmacéutico.</p>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 2 — BENEFICIOS & CARACTERÍSTICAS
+════════════════════════════════════════ -->
+<section class="section-benefits">
+  <div class="container">
+    <div class="section-label">Por qué Eutecnet</div>
+    <h2 class="section-title">
+      Lo que busca tu laboratorio<br>
+      <span class="dim">lo resolvemos con una sola llamada.</span>
+    </h2>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">⚙️</div>
+        <h3>Un solo proveedor para todo</h3>
+        <p>Aire comprimido, gases técnicos, instrumentación, hidráulica y filtración. Diseño, instalación y mantenimiento. Sin intermediarios que diluyan la responsabilidad.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🧪</div>
+        <h3>Especificaciones farmacéuticas</h3>
+        <p>Cumplimiento de GMP, ISO 8573 y normativas de calidad del sector. Documentación técnica lista para auditoría desde el primer día.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🔬</div>
+        <h3>Cero paradas no planificadas</h3>
+        <p>Sistemas redundantes, mantenimiento preventivo y respuesta de urgencia. Tu planta no puede permitirse tiempos muertos por fallos de suministro.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📋</div>
+        <h3>Proyectos técnicos a medida</h3>
+        <p>No vendemos catálogo. Cada solución se diseña desde cero analizando tu proceso, tus consumos y tus restricciones de espacio y normativa.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🏭</div>
+        <h3>Marcas líderes del sector</h3>
+        <p>CompAir, Dräger, ELGi, Atlas Copco y más. Seleccionamos el equipamiento más adecuado para tu aplicación concreta, no el más rentable para nosotros.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📞</div>
+        <h3>Interlocutor técnico único</h3>
+        <p>Un ingeniero de referencia que conoce tu instalación. Sin centralitas. Sin tickets. Respuesta directa a quien entiende el problema.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-number">+20</span>
+        <span class="stat-label">Años en ingeniería industrial</span>
+      </div>
+      <div class="stat-item" style="background:#1e8c38;">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Proyectos documentados y auditables</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">1</span>
+        <span class="stat-label">Interlocutor. Un contrato. Cero fricciones.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 3 — FORMULARIO DINÁMICO
+════════════════════════════════════════ -->
+<section class="section-form" id="formulario">
+  <div class="form-wrapper">
+    <div class="form-header">
+      <div class="pill">10 plazas disponibles este mes</div>
+      <h2>¿Tenemos encaje para tu laboratorio?</h2>
+      <p>Responde 4 preguntas rápidas. Si hay encaje, te contactamos en menos de 24h con una propuesta técnica inicial — sin coste.</p>
+    </div>
+
+    <div class="form-card">
+      <!-- Progress -->
+      <div class="progress-bar" id="progressBar">
+        <div class="step-dot active" id="dot1">1</div>
+        <div class="step-line" id="line1"></div>
+        <div class="step-dot" id="dot2">2</div>
+        <div class="step-line" id="line2"></div>
+        <div class="step-dot" id="dot3">3</div>
+        <div class="step-line" id="line3"></div>
+        <div class="step-dot" id="dot4">4</div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="form-step active" id="step1">
+        <div class="form-question">¿Cuál es tu mayor problema ahora mismo?</div>
+        <div class="form-hint">Selecciona la opción que más se acerca a tu situación actual.</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="selectOption(this, 1)">
+            <span class="opt-icon">⏱️</span>
+            Paradas de producción frecuentes
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 1)">
+            <span class="opt-icon">💸</span>
+            Coste de mantenimiento muy elevado
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 1)">
+            <span class="opt-icon">📋</span>
+            Dificultades para pasar auditorías GMP
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 1)">
+            <span class="opt-icon">🔧</span>
+            Quiero renovar o ampliar instalaciones
+          </button>
+        </div>
+        <div class="nav-btns">
+          <span></span>
+          <button class="btn-next" onclick="nextStep(1)" id="next1" disabled>
+            Siguiente <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="form-step" id="step2">
+        <div class="form-question">¿Qué sistemas necesitas cubrir?</div>
+        <div class="form-hint">Puedes seleccionar más de uno.</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="selectOption(this, 2, true)">
+            <span class="opt-icon">💨</span>
+            Aire comprimido / Gases técnicos
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 2, true)">
+            <span class="opt-icon">🌡️</span>
+            Instrumentación y automatización
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 2, true)">
+            <span class="opt-icon">🔩</span>
+            Hidráulica y filtración industrial
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 2, true)">
+            <span class="opt-icon">📐</span>
+            Proyecto técnico completo / llave en mano
+          </button>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-back" onclick="prevStep(2)">← Atrás</button>
+          <button class="btn-next" onclick="nextStep(2)" id="next2" disabled>
+            Siguiente <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="form-step" id="step3">
+        <div class="form-question">¿Cuándo necesitas una solución?</div>
+        <div class="form-hint">Esto nos ayuda a priorizar y preparar la propuesta correcta.</div>
+        <div class="options-grid" style="grid-template-columns:1fr 1fr;">
+          <button class="option-btn" onclick="selectOption(this, 3)">
+            <span class="opt-icon">🚨</span>
+            Urgente — Menos de 30 días
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 3)">
+            <span class="opt-icon">📅</span>
+            Este trimestre (1–3 meses)
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 3)">
+            <span class="opt-icon">🗓️</span>
+            En los próximos 6 meses
+          </button>
+          <button class="option-btn" onclick="selectOption(this, 3)">
+            <span class="opt-icon">🔍</span>
+            Estoy evaluando opciones
+          </button>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-back" onclick="prevStep(3)">← Atrás</button>
+          <button class="btn-next" onclick="nextStep(3)" id="next3" disabled>
+            Siguiente <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — Datos de contacto -->
+      <div class="form-step" id="step4">
+        <div class="form-question">Perfecto. ¿A quién llamamos?</div>
+        <div class="form-hint">Un técnico de Eutecnet revisará tu caso y te llamará en menos de 24 horas laborables.</div>
+
+        <div class="field-row">
+          <div>
+            <label>Nombre completo *</label>
+            <input type="text" id="fname" placeholder="Tu nombre">
+          </div>
+          <div>
+            <label>Cargo / Rol *</label>
+            <input type="text" id="role" placeholder="Ej: Director de planta">
+          </div>
+        </div>
+
+        <label>Empresa (laboratorio) *</label>
+        <input type="text" id="company" placeholder="Nombre del laboratorio">
+
+        <div class="field-row">
+          <div>
+            <label>Teléfono *</label>
+            <input type="tel" id="phone" placeholder="+34 600 000 000">
+          </div>
+          <div>
+            <label>Email corporativo *</label>
+            <input type="email" id="email" placeholder="tu@empresa.com">
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button class="btn-back" onclick="prevStep(4)">← Atrás</button>
+          <button class="btn-next" onclick="submitForm()" style="background:var(--green-dark); font-size:16px; padding:15px 32px;">
+            Quiero que me llamen ✓
+          </button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✅</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">
+          Solicitud recibida
+        </h3>
+        <p style="color:var(--text-muted);line-height:1.6;margin-bottom:24px;">
+          Un ingeniero de Eutecnet revisará tu caso y se pondrá en contacto contigo en las próximas <strong>24 horas laborables</strong>.
+        </p>
+        <p style="font-size:13px;color:var(--text-muted);">
+          Mientras tanto, puedes escribirnos a <a href="mailto:info@eutecnet.com" style="color:var(--green)">info@eutecnet.com</a> o llamar al <strong>+34 91 080 91 53</strong>
+        </p>
+      </div>
+
+    </div><!-- .form-card -->
+
+    <div class="trust-row">
+      <div class="trust-item">🔒 Datos protegidos (RGPD)</div>
+      <div class="trust-item">· Sin spam</div>
+      <div class="trust-item">· Sin compromiso</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MODAL — Formulario post-vídeo
+════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="pill">Solo 10 plazas este mes</div>
+    <h2>¿Tu laboratorio encaja con nosotros?</h2>
+    <p class="sub">Cuéntanos brevemente tu situación y te llamamos en menos de 24h con una propuesta técnica inicial — gratis y sin compromiso.</p>
+
+    <label>Nombre y empresa</label>
+    <input type="text" id="mName" placeholder="Ej: Luis García — Lab Farmacéutico X">
+
+    <label>Teléfono</label>
+    <input type="tel" id="mPhone" placeholder="+34 600 000 000">
+
+    <label>¿Cuál es tu reto principal?</label>
+    <div class="options-grid" style="margin-bottom:20px;">
+      <button class="option-btn" onclick="selectOption(this, 99)">⏱️ Paradas de producción</button>
+      <button class="option-btn" onclick="selectOption(this, 99)">💸 Costes elevados</button>
+      <button class="option-btn" onclick="selectOption(this, 99)">📋 Auditorías GMP</button>
+      <button class="option-btn" onclick="selectOption(this, 99)">🔧 Renovación de planta</button>
+    </div>
+
+    <button class="btn-green" style="width:100%;" onclick="submitModal()">
+      Quiero hablar con un especialista →
+    </button>
+    <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px;">
+      🔒 Sin spam · Respuesta en menos de 24h laborables
+    </p>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p>© 2026 Eutecnet S.L. · <a href="#">Política de privacidad</a> · <a href="#">Aviso legal</a> · info@eutecnet.com · +34 91 080 91 53</p>
+  <p style="margin-top:8px;">Pol. Río San Pedro C/ Panama Parcela 3.8 n.º 8 · 11510 Puerto Real · Cádiz · España</p>
+</footer>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+// ─── VSL TIMER ───
+const UNLOCK_SECONDS = 180; // 3 minutos
+let elapsed = 0;
+let timerInterval = null;
+let videoStarted = false;
+
+function startVideo() {
+  if (videoStarted) return;
+  videoStarted = true;
+
+  document.getElementById('vslThumbnail').style.display = 'none';
+  const playing = document.getElementById('vslPlaying');
+  playing.style.display = 'block';
+
+  // Video de demostración industrial (CompAir o similar relevante)
+  // Usamos un vídeo de YouTube sobre sistemas de aire comprimido industrial
+  const player = document.getElementById('ytPlayer');
+  player.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&modestbranding=1';
+  // ^ En producción: reemplazar con el VSL real de Eutecnet
+
+  startTimer();
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    elapsed++;
+    const pct = Math.min((elapsed / UNLOCK_SECONDS) * 100, 100);
+    document.getElementById('timerFill').style.width = pct + '%';
+
+    const remaining = Math.max(UNLOCK_SECONDS - elapsed, 0);
+    const mins = Math.floor(remaining / 60);
+    const secs = remaining % 60;
+
+    if (remaining > 0) {
+      document.getElementById('timerLabel').textContent =
+        `Formulario disponible en ${mins}:${secs.toString().padStart(2, '0')}`;
+    } else {
+      clearInterval(timerInterval);
+      document.getElementById('timerLabel').textContent = '✓ Disponible';
+      document.getElementById('vslCta').classList.add('visible');
+    }
+  }, 1000);
+}
+
+// ─── MODAL ───
+function openModal() {
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function submitModal() {
+  const name = document.getElementById('mName').value.trim();
+  const phone = document.getElementById('mPhone').value.trim();
+  if (!name || !phone) { alert('Por favor completa nombre y teléfono.'); return; }
+  closeModal();
+  alert('✅ ¡Recibido! Te llamamos en menos de 24h laborables. Gracias, ' + name.split(' ')[0] + '.');
+}
+
+// ─── FORM STEPS ───
+let stepData = {};
+
+function selectOption(btn, step, multi = false) {
+  if (!multi) {
+    const siblings = btn.parentElement.querySelectorAll('.option-btn');
+    siblings.forEach(b => b.classList.remove('selected'));
+  }
+  btn.classList.toggle('selected');
+
+  const anySelected = btn.parentElement.querySelectorAll('.option-btn.selected').length > 0;
+  const nextBtn = document.getElementById('next' + step);
+  if (nextBtn) nextBtn.disabled = !anySelected;
+}
+
+function nextStep(current) {
+  document.getElementById('step' + current).classList.remove('active');
+  const next = current + 1;
+  document.getElementById('step' + next).classList.add('active');
+  updateProgress(next);
+}
+
+function prevStep(current) {
+  document.getElementById('step' + current).classList.remove('active');
+  const prev = current - 1;
+  document.getElementById('step' + prev).classList.add('active');
+  updateProgress(prev);
+}
+
+function updateProgress(active) {
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('dot' + i);
+    dot.classList.remove('active', 'done');
+    if (i < active) dot.classList.add('done');
+    else if (i === active) dot.classList.add('active');
+  }
+  for (let i = 1; i <= 3; i++) {
+    const line = document.getElementById('line' + i);
+    line.classList.toggle('done', i < active);
+  }
+}
+
+function submitForm() {
+  const name = document.getElementById('fname').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!name || !phone || !email) {
+    alert('Por favor completa nombre, teléfono y email.');
+    return;
+  }
+
+  // Ocultar steps, mostrar success
+  document.getElementById('progressBar').style.display = 'none';
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('step' + i);
+    if (el) el.style.display = 'none';
+  }
+  document.getElementById('formSuccess').classList.add('active');
+}
+
+// Cerrar modal al hacer clic fuera
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+
+</body>
+</html>
